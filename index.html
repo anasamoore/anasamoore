@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #005aa7, #fffde4);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+    #countdown {
+      font-size: 2rem;
+      margin: 20px 0;
+      animation: pulse 1s infinite alternate;
+    }
+    .contact, .language-switcher, .social {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    .language-switcher button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .social a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #005aa7;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+  <div class="language-switcher">
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('so')">Somali</button>
+  </div>
+
+  <h1 id="title">Website Under Maintenance</h1>
+  <p id="countdown">Loading countdown...</p>
+ <!--  <p class="contact" id="contact">Contact us: <a href="mailto:info@example.com">info@example.com</a></p> -->
+<!-- 
+  <div class="social">
+    <a href="https://wa.me/252612345678" target="_blank">WhatsApp</a>
+    <a href="https://facebook.com/example" target="_blank">Facebook</a>
+    <a href="https://twitter.com/example" target="_blank">Twitter</a>
+  </div>
+-->
+  <script>
+    const endDate = new Date("2025-04-20T00:00:00").getTime();
+    const countdownElement = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        countdownElement.innerHTML = "We are live now!";
+      }
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+
+    function switchLanguage(lang) {
+      const title = document.getElementById("title");
+      const contact = document.getElementById("contact");
+
+      if (lang === 'so') {
+        title.innerText = "Bogga Hawl ayaa ka Socota";
+        contact.innerHTML = 'Nagala soo xiriir: <a href="mailto:info@example.com">info@example.com</a>';
+      } else {
+        title.innerText = "Website Under Construction";
+        contact.innerHTML = 'Contact us: <a href="mailto:info@example.com">info@example.com</a>';
+      }
+    }
+  </script>
+</body>
+</html>
